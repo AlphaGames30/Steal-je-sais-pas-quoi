@@ -43,6 +43,28 @@ document.addEventListener("touchend", e => {
 
 createLights(scene)
 
+import {createPlayer} from "./player/playerController.js"
+
+let player = createPlayer(scene, camera)
+
+function animate(){
+    requestAnimationFrame(animate)
+
+    // mise à jour du joueur
+    player.update()
+
+    // brainrots
+    updateBrainrots(scene, val => moneyObj.value += val)
+
+    // vol
+    trySteal(player, brainrots)
+
+    // HUD
+    updateHUD(moneyObj.value)
+
+    renderer.render(scene, camera)
+}
+
 createMap(scene)
 createBases(scene)
 createConveyor(scene)
